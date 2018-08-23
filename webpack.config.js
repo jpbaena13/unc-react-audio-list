@@ -4,8 +4,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'unc-react-component-base.js',
-    library: 'uncReactComponentBase',
+    filename: 'unc-react-audio-list.js',
+    library: 'unc-react-audio-list',
     libraryTarget: 'umd',
     publicPath: '/dist/',
     umdNamedDefine: true

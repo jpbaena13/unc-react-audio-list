@@ -4,7 +4,7 @@ module.exports = {
   entry: './example/index.js',
   output: {
     path: path.resolve(__dirname, 'example/dist'),
-    filename: 'unc-react-component-base.js'
+    filename: 'unc-react-audio-list.js'
   },
   module: {
     rules: [
@@ -21,6 +21,15 @@ module.exports = {
         test: /\.modernizrrc\.js$/,
         exclude: /(node_modules)/,
         loader: "webpack-modernizr-loader"
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2|svg)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: "fonts/[name].[ext]"
+          }
+        }
       }
     ]
   },

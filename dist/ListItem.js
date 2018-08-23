@@ -19,38 +19,68 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var MyComponent =
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+var ListItem =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(MyComponent, _React$Component);
+  _inherits(ListItem, _React$Component);
 
-  function MyComponent(props) {
+  function ListItem(props) {
     var _this;
 
-    _classCallCheck(this, MyComponent);
+    _classCallCheck(this, ListItem);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MyComponent).call(this, props));
-    _this.name = 'My Component';
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ListItem).call(this, props));
+    _this.onClick = _this.onClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
+  /**
+   * Lifecycle method.
+   *
+   * Pushs itself to the AudioList items array.
+   */
 
-  _createClass(MyComponent, [{
+
+  _createClass(ListItem, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.items.push(this);
+    }
+    /**
+     * Click Handler of the component.
+     */
+
+  }, {
+    key: "onClick",
+    value: function onClick() {
+      this.props.onClickItem(this);
+    }
+    /**
+     * Render method.
+     */
+
+  }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("h1", null, "Hello ", this.name);
+      var className = this.props.currentItem === this ? 'unc-list-item active' : 'unc-list-item';
+      return _react.default.createElement("div", {
+        className: className,
+        onClick: this.onClick
+      }, _react.default.createElement("div", {
+        className: "unc-list-title"
+      }, this.props.title));
     }
   }]);
 
-  return MyComponent;
+  return ListItem;
 }(_react.default.Component);
 
-var _default = MyComponent;
+var _default = ListItem;
 exports.default = _default;

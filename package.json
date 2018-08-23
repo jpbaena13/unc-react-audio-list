@@ -1,7 +1,7 @@
 {
-  "name": "unc-react-component-base",
+  "name": "unc-react-audio-list",
   "version": "1.0.0",
-  "description": "React Component Base",
+  "description": "React Audio list component",
   "main": "dist/index.js",
   "scripts": {
     "wp": "webpack",
@@ -9,10 +9,18 @@
     "test": "ava",
     "build": "babel src --out-dir dist --copy-files"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "js",
+    "javascript",
+    "jpbaena13",
+    "react-component",
+    "audio list"
+  ],
   "author": "Juan Baena <juan.baena@unicodigital.co>",
   "license": "MIT",
   "peerDependencies": {
+    "bootstrap": "^4.1.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
   },
@@ -27,6 +35,7 @@
     "babel-core": "^7.0.0-beta.3",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.0-beta.4",
+    "bootstrap": "^4.1.3",
     "css-loader": "^1.0.0",
     "enzyme": "^3.4.1",
     "enzyme-adapter-react-16": "^1.2.0",
@@ -36,6 +45,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
+    "file-loader": "^1.1.11",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "style-loader": "^0.22.1",
@@ -49,18 +59,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jpbaena13/unc-react-*.git"
+    "url": "https://github.com/jpbaena13/unc-react-audio-list.git"
   },
-  "keywords": [
-    "react",
-    "js",
-    "javascript",
-    "jpbaena13",
-    "react-component",
-  ],
   "bugs": {
-    "url": "https://github.com/jpbaena13/unc-react-*/issues"
+    "url": "https://github.com/jpbaena13/unc-react-audio-list/issues"
   },
-  "homepage": "https://github.com/jpbaena13/unc-react-*.git"
-
+  "homepage": "https://github.com/jpbaena13/unc-react-audio-list.git"
 }
