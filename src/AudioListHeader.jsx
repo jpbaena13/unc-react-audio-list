@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AudioListHeader extends React.Component {
+class AudioListHeader extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -11,11 +11,6 @@ class AudioListHeader extends React.Component {
     };
 
     this.audio = new Audio();
-
-    this.onClickPlay = this.onClickPlay.bind(this);
-    this.onClickMuted = this.onClickMuted.bind(this);
-    this.onClickProgressBar = this.onClickProgressBar.bind(this);
-    this.onTimeUpdate = this.onTimeUpdate.bind(this);
   }
 
   /**
@@ -29,6 +24,8 @@ class AudioListHeader extends React.Component {
    * Lifecycle method
    */
   componentWillReceiveProps(nextProps) {
+    const firstTime = !this.audio.file;
+
     if (this.audio.file !== nextProps.currentItem.props.file) {
       this.audio.src = nextProps.currentItem.props.file;
       this.audio.file = nextProps.currentItem.props.file;
@@ -38,17 +35,19 @@ class AudioListHeader extends React.Component {
       this.audio.currentTime = nextProps.currentItem.props.start;
     }
 
-    this.audio.play();
+    if (!firstTime || nextProps.autoPlay) {
+      this.audio.play();
 
-    this.setState({
-      isPlaying: true
-    });
+      this.setState({
+        isPlaying: true
+      });
+    }
   }
 
   /**
    * Callback audio function that is executed when the current playback position has changed.
    */
-  onTimeUpdate() {
+  onTimeUpdate = () => {
     const position = `${this.audio.currentTime / this.audio.duration * 100}%`;
 
     this.setState({
@@ -61,7 +60,7 @@ class AudioListHeader extends React.Component {
   /**
    * Mute or volume the audio.
    */
-  onClickMuted() {
+  onClickMuted = () => {
     this.audio.muted = !this.state.isMuted;
 
     this.setState(prevState => ({
@@ -72,7 +71,7 @@ class AudioListHeader extends React.Component {
   /**
    * Play or pause the audio.
    */
-  onClickPlay() {
+  onClickPlay= () => {
     if (this.state.isPlaying) {
       this.audio.pause();
     } else {
@@ -89,7 +88,7 @@ class AudioListHeader extends React.Component {
    *
    * @param  {SyntheticEvent} event SyntheticEvent from react.
    */
-  onClickProgressBar(event) {
+  onClickProgressBar = (event) => {
     const pos = (event.pageX - event.target.offsetLeft) / event.target.offsetWidth;
     this.audio.currentTime = this.audio.duration * pos;
   }
