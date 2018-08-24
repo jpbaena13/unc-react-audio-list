@@ -27,29 +27,41 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var ListItem =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(ListItem, _React$Component);
 
-  function ListItem(props) {
+  function ListItem() {
+    var _getPrototypeOf2;
+
     var _this;
 
     _classCallCheck(this, ListItem);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ListItem).call(this, props));
-    _this.onClick = _this.onClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListItem)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onClick", function () {
+      _this.props.onClickItem(_assertThisInitialized(_assertThisInitialized(_this)));
+    });
+
     return _this;
   }
-  /**
-   * Lifecycle method.
-   *
-   * Pushs itself to the AudioList items array.
-   */
-
 
   _createClass(ListItem, [{
     key: "componentDidMount",
+
+    /**
+     * Lifecycle method.
+     *
+     * Pushs itself to the AudioList items array.
+     */
     value: function componentDidMount() {
       this.props.items.push(this);
     }
@@ -58,16 +70,11 @@ function (_React$Component) {
      */
 
   }, {
-    key: "onClick",
-    value: function onClick() {
-      this.props.onClickItem(this);
-    }
+    key: "render",
+
     /**
      * Render method.
      */
-
-  }, {
-    key: "render",
     value: function render() {
       var className = this.props.currentItem === this ? 'unc-list-item active' : 'unc-list-item';
       return _react.default.createElement("div", {

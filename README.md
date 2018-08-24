@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'unc-react-audio-list/assets/css/audio-list.css';
 
 render(
-  <AudioList headerImageSrc="header.jpg">
+  <AudioList headerImageSrc="header.jpg" autoPlay>
     <ListSection file="audio.mp3" title="Ley de la cultura">
       <ListItem start="0" end="4" title="Ley de la cultura" />
       <ListItem start="5" end="9" title="Cultura y patrimonio cultural" />

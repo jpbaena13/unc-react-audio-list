@@ -165,6 +165,7 @@ function (_React$Component) {
         className: "unc-audio-list"
       }, _react.default.createElement(_AudioListHeader.default, {
         headerImageSrc: this.props.headerImageSrc,
+        autoPlay: this.props.autoPlay,
         audio: this.audio,
         onTimeUpdate: this.onTimeUpdate,
         nextItem: this.nextItem,

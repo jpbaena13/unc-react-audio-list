@@ -27,10 +27,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var AudioListHeader =
 /*#__PURE__*/
-function (_React$Component) {
-  _inherits(AudioListHeader, _React$Component);
+function (_React$PureComponent) {
+  _inherits(AudioListHeader, _React$PureComponent);
 
   function AudioListHeader(props) {
     var _this;
@@ -38,16 +40,52 @@ function (_React$Component) {
     _classCallCheck(this, AudioListHeader);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AudioListHeader).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onTimeUpdate", function () {
+      var position = "".concat(_this.audio.currentTime / _this.audio.duration * 100, "%");
+
+      _this.setState({
+        position: position
+      });
+
+      _this.props.onTimeUpdate(_this.audio.currentTime);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onClickMuted", function () {
+      _this.audio.muted = !_this.state.isMuted;
+
+      _this.setState(function (prevState) {
+        return {
+          isMuted: !prevState.isMuted
+        };
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onClickPlay", function () {
+      if (_this.state.isPlaying) {
+        _this.audio.pause();
+      } else {
+        _this.audio.play();
+      }
+
+      _this.setState(function (prevState) {
+        return {
+          isPlaying: !prevState.isPlaying
+        };
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onClickProgressBar", function (event) {
+      var pos = (event.pageX - event.target.offsetLeft) / event.target.offsetWidth;
+      _this.audio.currentTime = _this.audio.duration * pos;
+    });
+
     _this.state = {
       isMuted: false,
       isPlaying: false,
       position: '0%'
     };
     _this.audio = new Audio();
-    _this.onClickPlay = _this.onClickPlay.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onClickMuted = _this.onClickMuted.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onClickProgressBar = _this.onClickProgressBar.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onTimeUpdate = _this.onTimeUpdate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
   /**
@@ -67,6 +105,8 @@ function (_React$Component) {
   }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
+      var firstTime = !this.audio.file;
+
       if (this.audio.file !== nextProps.currentItem.props.file) {
         this.audio.src = nextProps.currentItem.props.file;
         this.audio.file = nextProps.currentItem.props.file;
@@ -76,75 +116,23 @@ function (_React$Component) {
         this.audio.currentTime = nextProps.currentItem.props.start;
       }
 
-      this.audio.play();
-      this.setState({
-        isPlaying: true
-      });
+      if (!firstTime || nextProps.autoPlay) {
+        this.audio.play();
+        this.setState({
+          isPlaying: true
+        });
+      }
     }
     /**
      * Callback audio function that is executed when the current playback position has changed.
      */
 
   }, {
-    key: "onTimeUpdate",
-    value: function onTimeUpdate() {
-      var position = "".concat(this.audio.currentTime / this.audio.duration * 100, "%");
-      this.setState({
-        position: position
-      });
-      this.props.onTimeUpdate(this.audio.currentTime);
-    }
-    /**
-     * Mute or volume the audio.
-     */
+    key: "render",
 
-  }, {
-    key: "onClickMuted",
-    value: function onClickMuted() {
-      this.audio.muted = !this.state.isMuted;
-      this.setState(function (prevState) {
-        return {
-          isMuted: !prevState.isMuted
-        };
-      });
-    }
-    /**
-     * Play or pause the audio.
-     */
-
-  }, {
-    key: "onClickPlay",
-    value: function onClickPlay() {
-      if (this.state.isPlaying) {
-        this.audio.pause();
-      } else {
-        this.audio.play();
-      }
-
-      this.setState(function (prevState) {
-        return {
-          isPlaying: !prevState.isPlaying
-        };
-      });
-    }
-    /**
-     * Take the cursor on the progressbar to where it has been clicked.
-     *
-     * @param  {SyntheticEvent} event SyntheticEvent from react.
-     */
-
-  }, {
-    key: "onClickProgressBar",
-    value: function onClickProgressBar(event) {
-      var pos = (event.pageX - event.target.offsetLeft) / event.target.offsetWidth;
-      this.audio.currentTime = this.audio.duration * pos;
-    }
     /**
      * Render method.
      */
-
-  }, {
-    key: "render",
     value: function render() {
       return _react.default.createElement("div", {
         className: "unc-audio-header"
@@ -189,7 +177,7 @@ function (_React$Component) {
   }]);
 
   return AudioListHeader;
-}(_react.default.Component);
+}(_react.default.PureComponent);
 
 var _default = AudioListHeader;
 exports.default = _default;

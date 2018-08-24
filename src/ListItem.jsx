@@ -1,12 +1,6 @@
 import React from 'react';
 
 class ListItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onClick = this.onClick.bind(this);
-  }
-
   /**
    * Lifecycle method.
    *
@@ -19,7 +13,7 @@ class ListItem extends React.Component {
   /**
    * Click Handler of the component.
    */
-  onClick() {
+  onClick = () => {
     this.props.onClickItem(this);
   }
 

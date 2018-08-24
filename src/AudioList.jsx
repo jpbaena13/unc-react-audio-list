@@ -115,6 +115,7 @@ class AudioList extends React.Component {
     return (
       <div className="unc-audio-list">
         <AudioListHeader headerImageSrc={this.props.headerImageSrc}
+                         autoPlay={this.props.autoPlay}
                          audio={this.audio}
                          onTimeUpdate={this.onTimeUpdate}
                          nextItem={this.nextItem}
